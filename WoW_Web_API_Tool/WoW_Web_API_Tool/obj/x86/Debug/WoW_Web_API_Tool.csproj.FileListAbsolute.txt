@@ -1,0 +1,9 @@
+U:\Development\C# Projects\WoW_Web_API_Tool\WoW_Web_API_Tool\obj\x86\Debug\WoW_Web_API_Tool.Form1.resources
+U:\Development\C# Projects\WoW_Web_API_Tool\WoW_Web_API_Tool\obj\x86\Debug\WoW_Web_API_Tool.Properties.Resources.resources
+U:\Development\C# Projects\WoW_Web_API_Tool\WoW_Web_API_Tool\obj\x86\Debug\WoW_Web_API_Tool.csproj.GenerateResource.Cache
+U:\Development\C# Projects\WoW_Web_API_Tool\WoW_Web_API_Tool\bin\Debug\WoW_Web_APILoad.exe
+U:\Development\C# Projects\WoW_Web_API_Tool\WoW_Web_API_Tool\bin\Debug\WoW_Web_APILoad.pdb
+U:\Development\C# Projects\WoW_Web_API_Tool\WoW_Web_API_Tool\obj\x86\Debug\WoW_Web_APILoad.exe
+U:\Development\C# Projects\WoW_Web_API_Tool\WoW_Web_API_Tool\obj\x86\Debug\WoW_Web_APILoad.pdb
+U:\Development\C#_Projects\WoW_Web_API_Tool\WoW_Web_API_Tool\obj\x86\Debug\WoW_Web_APILoad.exe
+U:\Development\C#_Projects\WoW_Web_API_Tool\WoW_Web_API_Tool\obj\x86\Debug\WoW_Web_APILoad.pdb
