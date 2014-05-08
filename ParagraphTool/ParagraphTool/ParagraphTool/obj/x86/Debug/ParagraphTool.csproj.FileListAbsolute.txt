@@ -1,0 +1,7 @@
+U:\Development\C# Projects\ParagraphTool\ParagraphTool\ParagraphTool\bin\Debug\ParagraphTool.exe
+U:\Development\C# Projects\ParagraphTool\ParagraphTool\ParagraphTool\bin\Debug\ParagraphTool.pdb
+U:\Development\C# Projects\ParagraphTool\ParagraphTool\ParagraphTool\obj\x86\Debug\ParagraphTool.Form1.resources
+U:\Development\C# Projects\ParagraphTool\ParagraphTool\ParagraphTool\obj\x86\Debug\ParagraphTool.Properties.Resources.resources
+U:\Development\C# Projects\ParagraphTool\ParagraphTool\ParagraphTool\obj\x86\Debug\ParagraphTool.csproj.GenerateResource.Cache
+U:\Development\C# Projects\ParagraphTool\ParagraphTool\ParagraphTool\obj\x86\Debug\ParagraphTool.exe
+U:\Development\C# Projects\ParagraphTool\ParagraphTool\ParagraphTool\obj\x86\Debug\ParagraphTool.pdb

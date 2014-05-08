@@ -1,0 +1,7 @@
+U:\Development\C# Projects\MortgageCalculator\MortgageCalculator\MortgageCalculator\bin\Debug\MortgageCalculator.exe
+U:\Development\C# Projects\MortgageCalculator\MortgageCalculator\MortgageCalculator\bin\Debug\MortgageCalculator.pdb
+U:\Development\C# Projects\MortgageCalculator\MortgageCalculator\MortgageCalculator\obj\x86\Debug\MortgageCalculator.Form1.resources
+U:\Development\C# Projects\MortgageCalculator\MortgageCalculator\MortgageCalculator\obj\x86\Debug\MortgageCalculator.Properties.Resources.resources
+U:\Development\C# Projects\MortgageCalculator\MortgageCalculator\MortgageCalculator\obj\x86\Debug\MortgageCalculator.csproj.GenerateResource.Cache
+U:\Development\C# Projects\MortgageCalculator\MortgageCalculator\MortgageCalculator\obj\x86\Debug\MortgageCalculator.exe
+U:\Development\C# Projects\MortgageCalculator\MortgageCalculator\MortgageCalculator\obj\x86\Debug\MortgageCalculator.pdb
