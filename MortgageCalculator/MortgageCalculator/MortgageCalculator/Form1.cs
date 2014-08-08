@@ -19,62 +19,67 @@ namespace MortgageCalculator
         private void CalculateBtn_Click(object sender, EventArgs e)
         {
             LAmountTb.Focus();
-            double starting_balance, calculated_balance, loan_term;
-            double interest_paid, APR_rate, APR_percent, principle_paid, monthly_payment;
-            int payments_made; //Set up the payment counter variable to keep track of how many payments have been made.
+            double remaining_balance, preCalculated_Balance, loan_term, total_PaymentAmount = 0.00;
+            double APR_rate, APR_monthly_rate, monthly_payment, monthly_Interest_Amount, monthly_AmortizationAmount_PerMonth;
+            double APR_rate_Converted_ToPercent, monthly_PaymentTowardsInterest, monthly_PaymentTowardsPrinciple, current_balance;
 
+            // Clear any existing data to begin a new calculation and commit all initial values entered by the user on the form to memory
             try
             {
+                // Clear the mortgage schedule on each calculate click
                 MortageSchedLb.Items.Clear();
-                calculated_balance = Convert.ToDouble(LAmountTb.Text);
+
+                // Store the pre-calculated amount in a variable
+                preCalculated_Balance = Convert.ToDouble(LAmountTb.Text);
                 APR_rate = Convert.ToDouble(InterestRateTb.Text);
-                // Convert the user interest percentage into a format suitable for the calculation 
-                APR_percent = APR_rate * .01;
+
+                // *IMPORTANT* Extract the monthly interest % rate -- Since all calculations will be based on a MONTHLY payment schedules interest percentage -- 
+                // Source: http://www.myamortizationchart.com/articles/how-is-an-amortization-schedule-calculated/
+                APR_monthly_rate = APR_rate / 12;
+
+                // Convert the monthly interest rate into its percent interpretation to be used in the calculation
+                APR_rate_Converted_ToPercent = APR_monthly_rate * .01;
+
+                // Store the number of months of the loan term to be used in the calculation 
                 loan_term = Convert.ToDouble(MonthlyTermCb.Text);
-                //total_payment_count = (int)LTermUd.Value;
 
-                // assign the payment counter a default value
-                payments_made = 1;
+                // Extract the monthly payment amount based on the loan term without the interest:
+                monthly_payment = preCalculated_Balance / loan_term;
 
-                // Gets the monthly payment amount based on the loan term:
-                monthly_payment = (calculated_balance / loan_term);
+                // Get the monthly payment amount with the interest added
+                monthly_Interest_Amount = monthly_payment * APR_monthly_rate;
 
-                while (calculated_balance > 0.0 && payments_made <= loan_term)
-                {                    
-                    starting_balance = calculated_balance;
+                // Set up initial and remaining loan values in memory to keep track of the balance during and throughout the loop
+                current_balance = preCalculated_Balance;
+                remaining_balance = preCalculated_Balance;                
+                
 
-                    // Calculate the interest amount by multiplying the starting balance by .10 divided by the monthly plan that is chosen
-                    interest_paid = starting_balance * (APR_percent / loan_term);
-
-                    // Subtract the interest from the payment to get the principle amount
-                    principle_paid = monthly_payment - interest_paid;
-
-                    // Subtract the last payment from the balance, less the principle that has been paid
-                    calculated_balance = starting_balance - principle_paid;
-
-                    // If the remaining balance plus its interest is less than the payment amount
-                    // Update the remaining balance tb to display zero.
-                    // The interest paid and that balance minus the interest will tell us how much
-                    // principle was paid to get to zero.
-
-                    if ((starting_balance + interest_paid) < monthly_payment)
+                // Loop through the calculation until the payments made is equal to the loan term and the remaining balance has been paid off
+                for (int payments_made = 0; payments_made <= loan_term - 1 && remaining_balance >= 0.00; payments_made++)                    
                     {
-                        MortageSchedLb.Items.Add(payments_made + ". Payment: " + (starting_balance + interest_paid).ToString("C") + " Interest: " +
-                            interest_paid.ToString("C") + " Principle: " + (starting_balance - interest_paid).ToString("C") + " Loan Balance: $0.00");
+                        // Calculate the total monthly payment based on the amortization formula with interest -- Source: http://www.myamortizationchart.com/articles/how-is-an-amortization-schedule-calculated/
+                        monthly_AmortizationAmount_PerMonth = (APR_rate_Converted_ToPercent * current_balance * Math.Pow(1 + APR_rate_Converted_ToPercent, loan_term)) / (Math.Pow(1 + APR_rate_Converted_ToPercent, loan_term) - 1);
 
-                        FinalPaymentTb.Text = (starting_balance - interest_paid).ToString("C"); 
+                        // Calculate the total amount that goes to the interest
+                        monthly_PaymentTowardsInterest = remaining_balance * APR_rate_Converted_ToPercent;
+
+                        // Calculate the total amount that goes towards the principle for each payment
+                        monthly_PaymentTowardsPrinciple = monthly_AmortizationAmount_PerMonth - monthly_PaymentTowardsInterest;
+
+                        // Keep track of the total amount paid so far 
+                        total_PaymentAmount += monthly_AmortizationAmount_PerMonth;
+                        
+                        // Deduct the principle paid, each time from the remaining balance and reassign as the new remaining balance
+                        remaining_balance = remaining_balance - monthly_PaymentTowardsPrinciple;
+
+                        // Keep track of the total amount paid so far                        
+
+                        // Format and print out the schedule in the listbox
+                        MortageSchedLb.Items.Add(payments_made + 1 + " Payment: " + (monthly_AmortizationAmount_PerMonth).ToString("C") + " Towards Interest: " +
+                        monthly_PaymentTowardsInterest.ToString("C") + " Toward Principle: " + (monthly_PaymentTowardsPrinciple).ToString("C") + " Remaining Balance: " + (remaining_balance).ToString("C"));                        
                     }
-                    else
-                        // Show the amortization schedule containing the payment, interest, principle, and balance based on a month to month schedule.
-                    {
-                        MortageSchedLb.Items.Add(payments_made + ". Payment: " + monthly_payment.ToString("C") + " Interest: " +
-                            interest_paid.ToString("C") + " Principle: " + principle_paid.ToString("C") + " Loan Balance: " + calculated_balance.ToString("C"));
-
-                        FinalPaymentTb.Text = calculated_balance.ToString("C");
-                    }
-
-                    payments_made++;
-                }
+                        // Assign the total amount that was paid back on the mortgage
+                        TotalPaymentTb.Text = total_PaymentAmount.ToString("C");
             }
             catch (Exception ex)
             {
